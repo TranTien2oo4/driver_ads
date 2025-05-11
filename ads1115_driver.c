@@ -1,7 +1,4 @@
-// SPDX-License-Identifier: GPL-2.0-or-later
-/*
- * Driver for Texas Instruments ADS1115 ADC
- */
+//DRIVER ADS1115 ADC
 
 #include <linux/init.h>
 #include <linux/module.h>
@@ -304,6 +301,6 @@ static void __exit ads1115_exit(void)
 }
 module_exit(ads1115_exit);
 
-MODULE_AUTHOR("Your Name");
-MODULE_DESCRIPTION("Driver for Texas Instruments ADS1115 ADC");
+MODULE_AUTHOR("TRANTIEN");
+MODULE_DESCRIPTION("DRIVER ADS1115 ADC");
 MODULE_LICENSE("GPL");
