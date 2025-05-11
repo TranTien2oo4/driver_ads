@@ -1,0 +1,86 @@
+Trần Văn Tiến      22146417
+Đặng Hữu Kiện      22146337
+Nguyễn Duy Trường  22146436
+Ca Tấn Dương       22146289
+
+
+__________________________CÁCH CHẠY DRIVER (CÀI ĐẶT ĐỊA CHỈ THỦ CÔNG I2C)______________________
+
+B1) Chạy lệnh biên dịch trong terminal
+	Mở terminal và di chuyển đến thư mục chứa mã nguồn driver ADS1115.
+	Chạy lệnh biên dịch để biên dịch driver:
+
+		make
+	=> Lệnh này sẽ biên dịch driver thành một file module kernel (ADS1115).
+
+B2) Chèn module vào kernel
+	Sau khi biên dịch thành công, chèn module vào kernel để có thể sử dụng driver:
+
+		sudo insmod ads1115_driver.ko
+
+	Kiểm tra xem module đã được chèn vào kernel chưa bằng cách chạy:
+
+		lsmod | grep ads1115
+
+	=>Nếu thấy module ads1115 xuất hiện, điều đó có nghĩa là module đã được chèn thành công vào kernel.
+
+B3) thêm thiết bị I2C thủ công
+
+	Giả sử đang dùng bus I2C số 1 (thường là i2c-1 trên Raspberry Pi), và địa chỉ của ADS1115 là 0x48,
+	bạn cần thêm thiết bị I2C thủ công vào hệ thống bằng cách chạy lệnh sau:
+
+		echo ads1115 0x48 | sudo tee /sys/bus/i2c/devices/i2c-1/new_device
+
+	Nếu lệnh thành công, sẽ thấy thiết bị ADS1115 đã được thêm vào hệ thống. Kiểm tra bằng cách chạy:
+		
+		ls /dev/ads1115
+
+	Nếu thư mục /dev/ads1115 xuất hiện, thì thiết bị đã được thêm THÀNH CÔNG.
+
+Note:   Nếu muốn gỡ driver ra khỏi lớp kernel khi không cần nữa 
+      
+		sudo rmmod mydriver
+
+ 	(Tùy chọn) Dọn dẹp file build
+	Nếu muốn xóa file .ko, .o, .mod.* sau khi build:
+
+		make clean
+
+B4) tạo một file test để chạy
+
+	Viết mã test cho ADS1115 trong file test_ads1115.c (hoặc sử dụng mã nguồn sẵn có).
+	  Sau đó biên dịch file này bằng GCC:
+
+		gcc test_ads1115.c -o test_ads1115
+
+	Chạy chương trình test để kiểm tra xem ADS1115 có hoạt động đúng không:
+
+			sudo ./test_ads1115 0
+
+	Lệnh này sẽ thực thi chương trình test_ads1115 với quyền root, 
+	giúp bạn kiểm tra việc giao tiếp với thiết bị ADS1115.
+	'0' là kênh muốn đo, có 4 kênh trên ads1115: A0, A1, A2, A3
+
+
+Explain Code:
+
+	Khi không dùng Device Tree, thì phải tự cài đặt việc khởi tạo driver, 
+	thêm thiết bị (i2c_new_device), và đăng ký thủ công. 
+	    Bên trong driver mẫu có dòng định nghĩa:
+
+		 #define ADS1115_MAJOR             160
+
+	    Dùng để Đặt số major của driver thiết bị (character device) là 160.
+	   → Linux kernel sẽ tạo driver thiết bị kiểu ký tự có số major là 160 
+	    và sử dụng hàm ads1115_fops để xử lý các thao tác.
+
+		#define N_ADS1115_MINORS          16
+	    Số minor (số hiệu phụ) thường được dùng để phân biệt giữa nhiều thiết bị được quản lý bởi cùng một driver.
+	Trước khi tự định nghĩa số major thì phải kiểm tra xem những thiết bị đã được đăng kí trước đó
+	kiểm tra bằng lệnh:
+		
+		cat /proc/devices
+	
+	→ Điều này giúp tránh xung đột với các thiết bị đã có sẵn.	
+
+
