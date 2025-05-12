@@ -13,7 +13,7 @@ Các thiết bị I2C trong nhân Linux được hỗ trợ thông qua hệ th�
 bằng nhiều hàm hỗ trợ và lớp trừu tượng. Thông qua các API trong kernel, Ta có thể kiểm soát hoàn toàn 
 việc truyền dữ liệu I2C, cấp phát bộ nhớ và đăng ký driver.
 
-#include <linux/init.h>
+#include <linux/init.h>                                   
 #include <linux/module.h>
 #include <linux/ioctl.h>
 #include <linux/fs.h>
