@@ -10,17 +10,18 @@ B1) Chạy lệnh biên dịch trong terminal
 	Mở terminal và di chuyển đến thư mục chứa mã nguồn driver ADS1115.
 	Chạy lệnh biên dịch để biên dịch driver:
 
-		make
+		$make
+
 	=> Lệnh này sẽ biên dịch driver thành một file module kernel (ADS1115).
 
 B2) Chèn module vào kernel
 	Sau khi biên dịch thành công, chèn module vào kernel để có thể sử dụng driver:
 
-		sudo insmod ads1115_driver.ko
+		$sudo insmod ads1115_driver.ko
 
 	Kiểm tra xem module đã được chèn vào kernel chưa bằng cách chạy:
 
-		lsmod | grep ads1115
+		$lsmod | grep ads1115
 
 	=>Nếu thấy module ads1115 xuất hiện, điều đó có nghĩa là module đã được chèn thành công vào kernel.
 
@@ -29,33 +30,33 @@ B3) thêm thiết bị I2C thủ công
 	Giả sử đang dùng bus I2C số 1 (thường là i2c-1 trên Raspberry Pi), và địa chỉ của ADS1115 là 0x48,
 	bạn cần thêm thiết bị I2C thủ công vào hệ thống bằng cách chạy lệnh sau:
 
-		echo ads1115 0x48 | sudo tee /sys/bus/i2c/devices/i2c-1/new_device
+		$echo ads1115 0x48 | sudo tee /sys/bus/i2c/devices/i2c-1/new_device
 
 	Nếu lệnh thành công, sẽ thấy thiết bị ADS1115 đã được thêm vào hệ thống. Kiểm tra bằng cách chạy:
 		
-		ls /dev/ads1115
+		$ls /dev/ads1115
 
 	Nếu thư mục /dev/ads1115 xuất hiện, thì thiết bị đã được thêm THÀNH CÔNG.
 
 Note:   Nếu muốn gỡ driver ra khỏi lớp kernel khi không cần nữa 
       
-		sudo rmmod mydriver
+		$sudo rmmod mydriver
 
  	(Tùy chọn) Dọn dẹp file build
 	Nếu muốn xóa file .ko, .o, .mod.* sau khi build:
 
-		make clean
+		$make clean
 
 B4) tạo một file test để chạy
 
 	Viết mã test cho ADS1115 trong file test_ads1115.c (hoặc sử dụng mã nguồn sẵn có).
-	  Sau đó biên dịch file này bằng GCC:
+	Sau đó biên dịch file này bằng GCC:
 
-		gcc test_ads1115.c -o test_ads1115
+		$gcc test_ads1115.c -o test_ads1115
 
 	Chạy chương trình test để kiểm tra xem ADS1115 có hoạt động đúng không:
 
-			sudo ./test_ads1115 0
+		$sudo ./test_ads1115 0
 
 	Lệnh này sẽ thực thi chương trình test_ads1115 với quyền root, 
 	giúp bạn kiểm tra việc giao tiếp với thiết bị ADS1115.
@@ -79,7 +80,7 @@ Explain Code:
 	Trước khi tự định nghĩa số major thì phải kiểm tra xem những thiết bị đã được đăng kí trước đó
 	kiểm tra bằng lệnh:
 		
-		cat /proc/devices
+		$cat /proc/devices
 	
 	→ Điều này giúp tránh xung đột với các thiết bị đã có sẵn.	
 
