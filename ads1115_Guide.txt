@@ -78,11 +78,8 @@ Explain Code:
 
 		#define N_ADS1115_MINORS          16
 	    Số minor (số hiệu phụ) thường được dùng để phân biệt giữa nhiều thiết bị được quản lý bởi cùng một driver.
-	Trước khi tự định nghĩa số major thì phải kiểm tra xem những thiết bị đã được đăng kí trước đó
-	kiểm tra bằng lệnh:
+  !!!CHÚ Ý: Trước khi tự định nghĩa số major thì phải kiểm tra xem major đang đăng kí đã được đăng kí hay chưa :
 		
 		$cat /proc/devices
-	
-	→ Điều này giúp tránh xung đột với các thiết bị đã có sẵn.	
 
 
