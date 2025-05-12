@@ -25,18 +25,21 @@ B2) Chèn module vào kernel
 
 	=>Nếu thấy module ads1115 xuất hiện, điều đó có nghĩa là module đã được chèn thành công vào kernel.
 
-B3) thêm thiết bị I2C thủ công
-
-	Giả sử đang dùng bus I2C số 1 (thường là i2c-1 trên Raspberry Pi), và địa chỉ của ADS1115 là 0x48,
-	bạn cần thêm thiết bị I2C thủ công vào hệ thống bằng cách chạy lệnh sau:
+B3) Thêm thiết bị I2C thủ công
+	Trước khi thêm thiết bị thủ công, hãy kiểm tra địa chỉ I2C của module bằng lệnh:
+		$sudo i2cdetect -y 1 
+	hoặc:
+		$sudo gpio i2cdetect
+	Để kiểm tra xem địa chỉ I2C đang sử dụng là gì? (Mặc định ADS1115 trong kết nối với Raspberry là 0x48).
+	Nếu bus I2C số 1 kết hợp với địa chỉ của ADS1115 là 0x48 ở trên khi thêm thiết bị I2C thủ công thì chạy lệnh:
 
 		$echo ads1115 0x48 | sudo tee /sys/bus/i2c/devices/i2c-1/new_device
 
-	Nếu lệnh thành công, sẽ thấy thiết bị ADS1115 đã được thêm vào hệ thống. Kiểm tra bằng cách chạy:
+	Nếu lệnh thành công, sẽ thấy thiết bị ADS1115 đã được đăng kí vào hệ thống. Kiểm tra bằng cách chạy:
 		
 		$ls /dev/ads1115
 
-	Nếu thư mục /dev/ads1115 xuất hiện, thì thiết bị đã được thêm THÀNH CÔNG.
+	Nếu thư mục /dev/ads1115 xuất hiện, thì thiết bị đã được đăng kí THÀNH CÔNG.
 
 Note:   Nếu muốn gỡ driver ra khỏi lớp kernel khi không cần nữa 
       
@@ -47,7 +50,7 @@ Note:   Nếu muốn gỡ driver ra khỏi lớp kernel khi không cần nữa
 
 		$make clean
 
-B4) tạo một file test để chạy
+B4) Tạo một file test để chạy
 
 	Viết mã test cho ADS1115 trong file test_ads1115.c (hoặc sử dụng mã nguồn sẵn có).
 	Sau đó biên dịch file này bằng GCC:
@@ -58,9 +61,7 @@ B4) tạo một file test để chạy
 
 		$sudo ./test_ads1115 0
 
-	Lệnh này sẽ thực thi chương trình test_ads1115 với quyền root, 
-	giúp bạn kiểm tra việc giao tiếp với thiết bị ADS1115.
-	'0' là kênh muốn đo, có 4 kênh trên ads1115: A0, A1, A2, A3
+	Lệnh này sẽ thực thi chương trình test_ads1115 với quyền root, giúp kiểm tra việc giao tiếp với thiết bị ADS1115, '0' là 	kênh muốn đo, có 4 kênh trên module ADS1115: A0, A1, A2, A3
 
 
 Explain Code:
