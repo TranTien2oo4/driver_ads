@@ -29,10 +29,10 @@ việc truyền dữ liệu I2C, cấp phát bộ nhớ và đăng ký driver.
 
 Một số lý do khiến bạn có thể muốn sử dụng giao diện lập trình trong kernel bao gồm:
 
-	- Viết các driver cấp thấp tương tác trực tiếp với thiết bị I2C 
+	Viết các driver cấp thấp tương tác trực tiếp với thiết bị I2C 
 	thông qua các cấu trúc như i2c_client, i2c_driver và các hàm liên quan.
 
-	- Triển khai các giao thức hoặc driver thiết bị cần tích hợp với mô hình thiết bị của Linux, 
+	Triển khai các giao thức hoặc driver thiết bị cần tích hợp với mô hình thiết bị của Linux, 
 	quản lý bộ nhớ, cơ chế đồng bộ hoặc truy cập vào các chức năng chỉ có trong nhân.
 
 Tất nhiên, có những driver không thể viết ở không gian người dùng (userspace), vì chúng cần truy cập vào các tài nguyên 
