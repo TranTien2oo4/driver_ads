@@ -14,19 +14,19 @@ bằng nhiều hàm hỗ trợ và lớp trừu tượng. Thông qua các API tr
 việc truyền dữ liệu I2C, cấp phát bộ nhớ và đăng ký driver.
 
 #include <linux/init.h>                                   
-#include <linux/module.h>
-#include <linux/ioctl.h>
-#include <linux/fs.h>
-#include <linux/device.h>
-#include <linux/err.h>
-#include <linux/list.h>
-#include <linux/errno.h>
-#include <linux/mutex.h>
-#include <linux/slab.h>
-#include <linux/uaccess.h>
-#include <linux/delay.h>
-#include <linux/i2c.h>
-
+#include <linux/module.h>                                   
+#include <linux/ioctl.h>                                   
+#include <linux/fs.h>                                   
+#include <linux/device.h>                                   
+#include <linux/err.h>                                   
+#include <linux/list.h>                                   
+#include <linux/errno.h>                                   
+#include <linux/mutex.h>                                   
+#include <linux/slab.h>                                   
+#include <linux/uaccess.h>                                   
+#include <linux/delay.h>                                   
+#include <linux/i2c.h>                                   
+                                   
 Một số lý do khiến bạn có thể muốn sử dụng giao diện lập trình trong kernel bao gồm:
 
 	Viết các driver cấp thấp tương tác trực tiếp với thiết bị I2C 
