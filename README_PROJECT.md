@@ -9,7 +9,7 @@ TRẦN VĂN TIẾN       22146417 ;
 NGUYỄN DUY TRƯỜNG   22146436 ;                                    
 CA TẤN DƯƠNG        22146289 ;                                   
 
-
+------------------------------
 Driver ADS1113 này dùng để đọc chip ADS1115 và trả về giá trị điện áp tại chân được chọn cho chương trình gọi. Ứng dụng ví dụ sẽ đọc chip ADS1115 và in ra màn hình các giá trị điện áp từ các chân a0 đến a3.
 
 Các thiết bị I2C trong nhân Linux được hỗ trợ thông qua hệ thống con I2C, cho phép giao tiếp với các thiết bị phụ (slave) 
