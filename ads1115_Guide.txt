@@ -43,7 +43,7 @@ B3) Thêm thiết bị I2C thủ công
 
 Note:   Nếu muốn gỡ driver ra khỏi lớp kernel khi không cần nữa 
       
-		$sudo rmmod mydriver
+		$sudo rmmod ads1115
 
  	(Tùy chọn) Dọn dẹp file build
 	Nếu muốn xóa file .ko, .o, .mod.* sau khi build:
