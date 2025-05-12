@@ -48,7 +48,7 @@ Note:   Nếu muốn gỡ driver ra khỏi lớp kernel khi không cần nữa
  	(Tùy chọn) Dọn dẹp file build
 	Nếu muốn xóa file .ko, .o, .mod.* sau khi build:
 
-*		$make clean
+		$make clean
 
 B4) Tạo một file test để chạy
 
