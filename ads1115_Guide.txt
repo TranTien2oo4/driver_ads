@@ -48,7 +48,7 @@ Note:   Nếu muốn gỡ driver ra khỏi lớp kernel khi không cần nữa
  	(Tùy chọn) Dọn dẹp file build
 	Nếu muốn xóa file .ko, .o, .mod.* sau khi build:
 
-		$make clean
+*		$make clean
 
 B4) Tạo một file test để chạy
 
@@ -63,6 +63,12 @@ B4) Tạo một file test để chạy
 
 	Lệnh này sẽ thực thi chương trình test_ads1115 với quyền root, giúp kiểm tra việc giao tiếp với thiết bị ADS1115, '0' là 	kênh muốn đo, có 4 kênh trên module ADS1115: A0, A1, A2, A3
 
+B5) kiểm tra log kernel để chắc chắn rằng driver đã chạy:
+     Để xem thông báo từ kernel (hữu ích khi debug hoặc kiểm tra hoạt động của driver):
+
+		$dmesg
+     hoặc	
+		$dmesg -w (dùng để xem trực tiếp khi có sự thay đổi)
 
 Explain Code:
 
